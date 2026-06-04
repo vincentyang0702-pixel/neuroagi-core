@@ -515,7 +515,6 @@ Hardware Sales:
 
 Platform Licensing:
 ├─ FschoolAI: $X/month
-├─ Reggie: $X/month
 ├─ Worlosa: $X/month
 └─ Total: $10M+/month
 
@@ -646,8 +645,7 @@ Months 13-18: Ecosystem
 └─ Revenue sharing
 
 Months 19-24: Scale
-├─ Reggie (consumer)
-├─ Worlosa (enterprise)
+├─ Worlosa (enterprise, future)
 ├─ International expansion
 └─ Enterprise integrations
 
@@ -679,15 +677,7 @@ CEO: You (Vincent) or separate CEO
 └─ Content: Curriculum
 ```
 
-### Reggie Company
 
-```
-CEO: You (Vincent) or separate CEO
-├─ CTO: Full-stack
-├─ VP Product: Consumer strategy
-├─ VP Marketing: Consumer acquisition
-└─ VP Sales: B2B partnerships
-```
 
 ---
 
@@ -763,18 +753,16 @@ Result: Complete ecosystem where user owns everything
 
 ```
 NeuroAGI: Brain + Hardware + Platform
-FschoolAI: Education product using NeuroAGI
-Reggie: Consumer product using NeuroAGI
-Worlosa: Enterprise product using NeuroAGI
+FschoolAI: Education product using NeuroAGI (Reggie = FschoolAI's AI tutor agent)
+Worlosa: Enterprise product using NeuroAGI (future)
 ```
 
 ### The Positioning
 
 ```
 NeuroAGI = Personal Operating System
-FschoolAI = Personalized Learning
-Reggie = Personal Intelligence
-Worlosa = Enterprise Intelligence
+FschoolAI = Personalized Learning (Reggie is FschoolAI's AI tutor)
+Worlosa = Enterprise Intelligence (future)
 ```
 
 ### The Timeline

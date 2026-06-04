@@ -23,7 +23,6 @@ This is PERFECT for the distributed architecture. Here's why and how to execute.
 One company trying to build everything:
 ├─ Brain
 ├─ Education product
-├─ Consumer product (Reggie)
 ├─ Enterprise product (Worlosa)
 └─ Result: Unfocused, slow, confused
 ```
@@ -362,7 +361,7 @@ Month 10-12: Ownership
 └─ Integration: FschoolAI shows ownership
 
 Year 2: Scale
-├─ NeuroAGI: Add Reggie, Worlosa
+├─ NeuroAGI: Add Worlosa (enterprise, future)
 ├─ FschoolAI: Expand features
 └─ Integration: All products use NeuroAGI
 ```
@@ -409,8 +408,8 @@ NeuroAGI can change internals without breaking FschoolAI
 ### Future Expansion
 
 ```
-When you add Reggie:
-├─ Reggie calls NeuroAGI API
+When you add a new product (e.g., Worlosa):
+├─ New product calls NeuroAGI API
 ├─ No changes to NeuroAGI
 └─ No changes to FschoolAI
 
@@ -439,7 +438,7 @@ FschoolAI (Education Product)
 ├─ Calls Personalization API
 └─ Calls Ownership API
 
-Reggie (Consumer Product) [Future]
+Worlosa (Enterprise Product) [Future]
 ├─ Calls Signal API
 ├─ Calls Insight API
 ├─ Calls Agent API
@@ -464,7 +463,7 @@ Worlosa (Enterprise Product) [Future]
 NeuroAGI (Central)
     ↑
     ├─ FschoolAI API call
-    ├─ Reggie API call
+    ├─ New product API call
     ├─ Worlosa API call
     └─ ...
 ```
@@ -472,7 +471,7 @@ NeuroAGI (Central)
 ### Future (Distributed)
 
 ```
-FschoolAI Node     Reggie Node     Worlosa Node
+FschoolAI Node     Worlosa Node
 (brain copy)       (brain copy)    (brain copy)
     ↓                  ↓                ↓
     └──────────────────┼──────────────────┘
@@ -676,8 +675,8 @@ A: Because it's slower, more confusing, and harder to scale. Two focused teams b
 **Q: Why not build FschoolAI first?**
 A: Because FschoolAI depends on NeuroAGI. Build the brain first, then the products.
 
-**Q: Why not build Reggie first?**
-A: Because you need to prove the brain works with FschoolAI first. Then replicate with Reggie.
+**Q: Why not build Worlosa first?**
+A: Because you need to prove the brain works with FschoolAI first. Then replicate for enterprise.
 
 **Q: How do you coordinate between teams?**
 A: Weekly syncs, API contracts, and clear ownership. NeuroAGI owns the brain, FschoolAI owns the product.
@@ -688,11 +687,11 @@ A: FschoolAI can still build with mock data. Then integrate when NeuroAGI is rea
 **Q: What if FschoolAI falls behind?**
 A: NeuroAGI can still build the brain. Then FschoolAI integrates when ready.
 
-**Q: When do you build Reggie?**
-A: After FschoolAI is successful (Month 12+). Reggie reuses NeuroAGI, just different UI.
+**Q: When do you build Worlosa?**
+A: After FschoolAI is successful (Month 12+). Worlosa reuses NeuroAGI, just different features.
 
 **Q: When do you build Worlosa?**
-A: After Reggie is successful (Month 18+). Worlosa reuses NeuroAGI, just different features.
+A: After FschoolAI is proven (Month 18+). Worlosa reuses NeuroAGI, just different features.
 
 **Q: How do you handle data sharing?**
 A: NeuroAGI owns the data, FschoolAI accesses via API. User owns everything via blockchain.

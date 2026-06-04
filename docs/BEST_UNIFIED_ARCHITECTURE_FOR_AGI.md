@@ -9,7 +9,7 @@
 This is the **optimal architecture** that combines:
 - ✅ Canvas integration (get real data)
 - ✅ Agent orchestration (make intelligent decisions)
-- ✅ Brain hierarchy (System, Library, Student, Reggie)
+- ✅ Brain hierarchy (System, Library, Student, Agent)
 - ✅ On-device processing (proactive, low latency)
 - ✅ Multi-LMS support (Canvas, Google Classroom, Blackboard, etc.)
 - ✅ Live data capture (passive + active)
@@ -72,7 +72,7 @@ This is the **optimal architecture** that combines:
 │  ├─ System Brain (academic structure, curriculum)              │
 │  ├─ Library Brain (resources, knowledge base)                  │
 │  ├─ Student Brain (current + historical learning)              │
-│  ├─ Reggie Brain (AI insights, predictions)                    │
+│  ├─ Agent Brain (AI insights, predictions)                    │
 │  ├─ Device Brain (local on NeuroGlass + iPhone)                │
 │  └─ Cloud Brain (synced to Supabase + blockchain)              │
 │     ├─ 57 tables (signals, knowledge graph, etc.)              │
@@ -82,7 +82,7 @@ This is the **optimal architecture** that combines:
                               ↓
 ┌────────────────────────────────────────────────────────────────┐
 │   LAYER 4: AGENT ORCHESTRATION (Decision Making)               │
-│  ├─ Reggie (Master Orchestrator)                               │
+│  ├─ Agent Manager (Master Orchestrator)                               │
 │  │  ├─ Reads all brains                                        │
 │  │  ├─ Detects intent                                          │
 │  │  ├─ Selects best agents                                     │
@@ -162,8 +162,8 @@ This is the **optimal architecture** that combines:
 | Vision | How Achieved |
 |--------|-------------|
 | Canvas integration | Layer 1: Multi-LMS connectors |
-| Agent orchestration | Layer 4: Reggie + 10 core agents |
-| Brain hierarchy | Layer 3: System, Library, Student, Reggie brains |
+| Agent orchestration | Layer 4: Agent Manager + 10 core agents |
+| Brain hierarchy | Layer 3: System, Library, Student, Agent brains |
 | On-device processing | Layer 2: Local brain on NeuroGlass + iPhone |
 | Proactive AI | Layer 5 + 6: Live capture + immediate response |
 | Data moat | Layer 3: 10B+ data points, user ownership |
@@ -243,7 +243,7 @@ Result: FAST and PROACTIVE
 - ✅ Canvas integration (API + OAuth + sync)
 - ✅ Agent orchestrator (routing + selection)
 - ✅ 10 core agents (study, focus, motivation, etc.)
-- ✅ Brain hierarchy (System, Library, Student, Reggie)
+- ✅ Brain hierarchy (System, Library, Student, Agent)
 - ✅ Local brain (on NeuroGlass + iPhone)
 
 ### Phase 2 (Months 4-6): Scale

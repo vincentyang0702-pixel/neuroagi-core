@@ -17,7 +17,7 @@ Think of NeuroAGI as the equivalent of Apple building iOS, or AWS building cloud
 - The Knowledge Graph — maps what every user knows
 - The Brain SDK — the API that products use to access the brain
 - The Neural Card — the physical hardware that makes the brain feel owned, not rented
-- NeuroOS — the agent orchestration layer (Reggie)
+- NeuroOS — the agent orchestration layer (Agent Manager)
 
 ### FschoolAI Inc. — The First Product
 
@@ -41,7 +41,7 @@ NeuroAGI Inc.
 ├── Brain Engine (core asset — never shared)
 ├── Brain SDK (the API — shared with all products)
 ├── Neural Card (hardware)
-└── NeuroOS / Reggie (agent manager)
+└── NeuroOS Agent Manager
     │
     ├── FschoolAI (first-party product — students)
     ├── Future Product 2 (health, productivity, etc.)
@@ -174,7 +174,7 @@ When the brain is proven with FschoolAI, NeuroAGI will open the SDK to external 
 | Canvas Integration | Working | Grades/assignments sync to brain |
 | Neural Card pre-sale | Live | reggieai.manus.space |
 | FschoolAI app | In development | React frontend + Express backend |
-| NeuroOS / Reggie | Conceptual | Agent manager not yet built |
+| NeuroOS Agent Manager | Conceptual | Agent manager not yet built |
 | Developer SDK (public) | Not started | After FschoolAI proves the model |
 
 ---

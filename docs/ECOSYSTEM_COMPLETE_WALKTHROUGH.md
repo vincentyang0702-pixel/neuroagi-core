@@ -30,7 +30,7 @@ The brain does four things:
 
 ### The Neural Card
 
-The physical product is a credit-card-sized device you carry in your wallet. It holds your brain data. It's your identity in the NeuroAGI ecosystem. Think of it like an iPhone — but instead of apps, it holds your intelligence. This is what you pre-sell at $599–$1,299 on the Reggie pre-sale page.
+The physical product is a credit-card-sized device you carry in your wallet. It holds your brain data. It's your identity in the NeuroAGI ecosystem. Think of it like an iPhone — but instead of apps, it holds your intelligence. This is what you pre-sell at $599–$1,299 on the NeuroAGI pre-sale page.
 
 ---
 
@@ -240,7 +240,7 @@ This is an honest assessment of what exists vs. what needs to happen:
 | Canvas integration | ✅ Written | Test with real Canvas account |
 | Database schema | ✅ Migrations written | Run `supabase db push` |
 | brain_signals table | ✅ Migration added | Run `supabase db push` |
-| Frontend (FschoolAI app) | ✅ In `reggie-mobile-proto` | Connect to backend API |
+| Frontend (FschoolAI app) | ✅ In `reggie-mobile-proto` (Reggie is FschoolAI's AI tutor) | Connect to backend API |
 | Neural Card pre-sale page | ✅ Live at neuro-agi.com | Connect Stripe for real payments |
 | Brain SDK (for developers) | ✅ Written | Publish docs publicly when ready |
 | Real user testing | ❌ Not started | **This is the most important next step** |
