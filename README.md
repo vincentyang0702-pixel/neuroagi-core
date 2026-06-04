@@ -1,170 +1,164 @@
 # NeuroAGI Core
 
-> The brain. The platform. The foundation of the NeuroAGI ecosystem.
+**The brain. The platform. The foundation of the NeuroAGI ecosystem.**
 
 ---
 
 ## What This Is
 
-NeuroAGI Core is the persistent intelligence engine that powers every product in the NeuroAGI ecosystem. It is **not** an app. It is the brain that apps are built on.
+NeuroAGI Core is a **persistent intelligence engine** — a per-user "brain" that
+lives independently of any single app. Products don't store their own user data
+and start from zero; they plug into the brain and know the user from day one.
 
-Think of it like this:
+NeuroAGI Core  =  the brain + the platform        (the foundation)
+FschoolAI      =  a product built on it           (students)
+Reggie         =  a product built on it           (personal agent)
+Your Agent     =  a product built on it           (ecosystem)
 
-```
-NeuroAGI Core  =  iOS + iCloud + Apple Silicon
-FschoolAI      =  An app built on top of that
-Reggie         =  Another app built on top of that
-Your Agent     =  Your app, also built on top of that
-```
 
-The difference from Apple: developers don't just build apps — they build **agents that tap into a user's persistent brain**. When you build on NeuroAGI, your agent knows the user from day one.
 
----
-
-## Repository Structure
-
-```
-neuroagi-core/
-├── src/
-│   ├── brain/          ← Core brain services (PRIVATE — never expose)
-│   │   ├── neuro-agi.ts          ← Main brain service
-│   │   ├── brain-compounding.ts  ← How the brain grows over time
-│   │   ├── knowledge-graph.ts    ← User knowledge graph
-│   │   ├── pattern-recognition.ts
-│   │   ├── causal-inference.ts
-│   │   ├── prediction-engine.ts
-│   │   └── intervention-engine.ts
-│   ├── agents/         ← Core agent implementations (PRIVATE)
-│   │   ├── study-agent.ts
-│   │   ├── focus-agent.ts
-│   │   └── ...
-│   ├── sdk/            ← PUBLIC — this is what developers use
-│   │   ├── brain-sdk.ts          ← Interface (the contract)
-│   │   └── brain-sdk-impl.ts     ← Implementation
-│   └── types/          ← Shared types
-├── docs/               ← Architecture docs
-└── tests/
-```
+Products never touch the brain's internals. They consume it through one
+**Brain API** — a stable contract. The brain is the asset; products are clients.
 
 ---
 
-## The Brain SDK
+## The Brain API
 
-The SDK is the **only** way external products interact with the brain. The internals are never exposed.
+Every interaction with the brain goes through these endpoints. They split into
+three groups: **Memory** (read/write), **Intelligence** (act/learn), and
+**Governance** (trust/privacy).
 
-```typescript
+### Memory
+
+| Endpoint | What it does | Status |
+|---|---|---|
+| `getContext(userId, productId)` | Everything the brain knows about a user | ✅ Available |
+| `update(event)` | Feed one event into the brain | ✅ Available |
+| `query(userId, filter)` | Targeted read (one subject, one signal type, a date range) | 🟡 Planned |
+| `setGoals(userId, goals)` | Set/manage a user's goals | 🟡 Planned |
+
+### Intelligence
+
+| Endpoint | What it does | Status |
+|---|---|---|
+| `suggestNext(userId)` | Best agent + action for right now | ✅ Available (rule-based) |
+| `recordOutcome(suggestionId, outcome)` | Tell the brain whether a suggestion worked — **the learning loop** | 🟡 Planned |
+| `subscribe(userId, trigger, webhook)` | Brain **pushes** when it detects something (stress, deadline, focus window) | 🟡 Planned |
+| `verifySkill(userId, skill)` | Evidence-backed proof of a skill | ✅ Available (basic) |
+| `explain(userId, claim)` | Why the brain concluded something (trust/audit) | 🟡 Planned |
+
+### Governance
+
+| Endpoint | What it does | Status |
+|---|---|---|
+| `exportData(userId)` | Full data export (portability) | ✅ Available |
+| `deleteData(userId)` | Right to be forgotten (GDPR/FERPA) | ✅ Available |
+| `getHealthMetrics(userId)` | Brain stats (signals, concepts, age) | ✅ Available |
+
+---
+
+## Usage
+
+```ts
 import { createBrainSDK } from '@neuroagi/brain-sdk';
 
 const brain = createBrainSDK({ productId: 'your-product-id' });
 
-// Get full user context — your agent is immediately personalized
+// 1. Read — your agent is personalized instantly
 const context = await brain.getContext(userId);
-// context.knowledgeGaps → what to teach next
+// context.knowledgeGaps  → what to teach next
+// context.focusPattern   → when to send notifications
 // context.emotionalState → how to tone the response
-// context.focusPattern → when to send notifications
 
-// Feed events into the brain — it learns from everything
+// 2. Write — the brain learns from every interaction
 await brain.update({
   userId,
   productId: 'your-product-id',
   eventType: 'concept_learned',
-  data: { subject: 'Calculus', concept: 'Integration', masteryLevel: 0.85 }
+  data: { subject: 'Calculus', concept: 'Integration', masteryLevel: 0.85 },
 });
 
-// Ask the brain what the user needs right now
+// 3. Act — ask what the user needs right now
 const suggestion = await brain.suggestNext(userId);
-// suggestion.agentId → which agent to use
-// suggestion.reason → why
-// suggestion.urgency → how fast to act
+// → { agentId, reason, action, urgency, confidence }
 
-// Verify a user's skill with observed evidence
-const proof = await brain.verifySkill(userId, 'Python');
-// proof.verified → true/false
-// proof.masteryLevel → 0.92
-// proof.evidenceCount → 47 sessions
-```
+// 4. Learn (roadmap) — close the loop so the brain improves
+await brain.recordOutcome(suggestion.id, { worked: true });
+The Core Loop
+A real brain isn't just storage — it's a closed loop:
 
----
 
-## The Four Core Methods
+   update() ──→  brain learns  ──→  suggestNext()  ──→  product acts
+      ▲                                                      │
+      └──────────────  recordOutcome()  ◄────────────────────┘
+                    (did the suggestion work?)
+recordOutcome and subscribe are what turn the brain from a smart database
+into something that learns and acts. They're the next build priority.
 
-| Method | What It Does | When to Call |
-|---|---|---|
-| `brain.getContext(userId)` | Returns everything the brain knows about this user | Before every AI response |
-| `brain.update(event)` | Feeds a new event into the brain | After every user action |
-| `brain.suggestNext(userId)` | Returns the best agent + action for right now | When deciding what to show the user |
-| `brain.verifySkill(userId, skill)` | Returns AI-verified proof of a skill | For skill badges, resumes, recruiting |
+Why Build on NeuroAGI?
+Without it: every app starts cold. Months of data collection before any
+personalization.
 
----
+With it: call getContext(userId) and immediately know what the user knows,
+how they learn, when they focus, and what they're struggling with. Every product
+gets smart on day one, and because they share one brain, learning compounds
+across the whole ecosystem.
 
-## Why Build on NeuroAGI?
+Architecture
 
-**Without NeuroAGI:** Your agent starts from zero with every new user. You spend months collecting data before you can personalize anything.
-
-**With NeuroAGI:** Your agent calls `brain.getContext(userId)` and immediately knows:
-- What the user knows and doesn't know
-- How they learn best
-- When they focus best
-- What they're struggling with right now
-- Their goals and emotional state
-
-Your agent is **immediately 10x more useful** than a generic AI.
-
----
-
-## Products Built on NeuroAGI
-
-| Product | Description | Status |
-|---|---|---|
-| **FschoolAI** | AI academic intelligence for students | Active |
-| **Reggie** | Personal AI agent manager | Planned |
-| **Neural Card** | Physical brain card (hardware) | Pre-sale |
-
----
-
-## For the NeuroAGI Dev Team
-
-The brain internals (`src/brain/`) are **never exposed to product teams**. Product teams (FschoolAI, Reggie) only get access to `src/sdk/`.
-
-This is intentional. The brain is the core asset. Products consume it through the SDK contract.
-
----
-
-## Ecosystem Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    NeuroAGI Core (This Repo)                 │
-│                                                              │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  Brain (PRIVATE)                                    │   │
-│  │  Pattern Recognition → Causal Inference             │   │
-│  │  → Prediction Engine → Intervention Engine          │   │
-│  └──────────────────────┬──────────────────────────────┘   │
-│                          │                                   │
-│  ┌───────────────────────▼──────────────────────────────┐  │
-│  │  Brain SDK (PUBLIC)                                  │  │
-│  │  getContext() | update() | suggestNext() | verify()  │  │
-│  └───────────────────────┬──────────────────────────────┘  │
-└──────────────────────────┼──────────────────────────────────┘
-                           │
+┌──────────────────────────────────────────────────────────┐
+│                  NeuroAGI Core (service)                   │
+│                                                            │
+│   Brain Engines (PRIVATE)                                  │
+│   pattern · causal · prediction · intervention · graph     │
+│                          │                                 │
+│                  Brain API (PUBLIC)                        │
+│   memory · intelligence · governance                       │
+└──────────────────────────┼─────────────────────────────────┘
+                           │  (HTTPS · scoped per-product key)
           ┌────────────────┼────────────────┐
-          │                │                │
-    ┌─────▼──────┐  ┌──────▼─────┐  ┌──────▼──────┐
-    │ FschoolAI  │  │   Reggie   │  │  Your Agent │
-    │ (students) │  │ (personal) │  │ (ecosystem) │
-    └────────────┘  └────────────┘  └─────────────┘
-          │                │                │
-          └────────────────┼────────────────┘
+     ┌────▼────┐      ┌─────▼────┐      ┌────▼─────┐
+     │FschoolAI│      │  Reggie  │      │Your Agent│
+     └─────────┘      └──────────┘      └──────────┘
                            │
                     ┌──────▼──────┐
                     │  Supabase   │
-                    │ (57 tables) │
                     └─────────────┘
-```
+The brain runs as a hosted service. Products get a thin client + a
+scoped key — never the service key, never the internals.
 
----
+Status & Roadmap
+NeuroAGI is early-stage. Here's what's real today vs. what's coming, so
+teams build against reality:
 
-## License
+✅ Working now
 
+Persistent per-user memory (getContext / update)
+Event ingestion + signal routing
+Rule-based suggestNext
+Basic verifySkill
+Data export / delete
+🟡 In progress / next
+
+Learning loop (recordOutcome) — so suggestions improve over time
+Proactive triggers (subscribe / webhooks) — brain pushes, not just polled
+Targeted queries (query) — stop over-fetching full context
+Per-product isolation + consent — scope what each product reads
+Wire the brain engines into suggestNext (pattern → prediction → intervention)
+🔭 Planned
+
+explain for trust/audit
+Hardened verifySkill with evidence model (for recruiting use)
+Goal management
+For the NeuroAGI Dev Team
+Brain engines (src/brain/) are private and run server-side only.
+Products consume the brain over the API with a per-product scoped key.
+The service key never ships inside a product.
+Products on NeuroAGI
+Product	Description	Status
+FschoolAI	AI academic intelligence for students	Active
+Reggie	Personal AI agent manager	Planned
+Neural Card	Physical brain card (hardware)	Pre-sale
 Proprietary — NeuroAGI Inc. All rights reserved.
+
+
